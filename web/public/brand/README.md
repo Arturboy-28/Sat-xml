@@ -1,19 +1,6 @@
-# Marca ALSUA — archivo oficial
+# Marca ALSUA
 
-Coloca aquí **exactamente** el logo que enviaste (sin rediseños):
+Logo oficial (archivo original del repo, sin rediseño):
 
-```text
-web/public/brand/alsua-logo.png
-```
-
-Opcional:
-```text
-web/public/brand/alsua-mark.png   # solo el círculo con A, si lo tienes aparte
-```
-
-## Cómo hacerlo
-
-1. Arrastra tu PNG/SVG oficial a esta carpeta, o
-2. En el chat: adjunta el archivo como fichero del proyecto (no solo pegado como imagen).
-
-No regenerar ni redibujar el logo.
+- Fuente: `IMG_2155.png` (raíz del repositorio)
+- Uso UI: `alsua-logo.png` (copia exacta byte a byte)
