@@ -30,6 +30,7 @@ Detalle visual y pantallas (marca **ALSUA**): [`docs/STACK_Y_UI.md`](docs/STACK_
 | Auditoría | Faltantes metadata vs XML; alertas cancelados; lista 69/69-B |
 | Extras | PDF representación (opcional); sync/scheduler diario |
 | Interfaces | **UI web** (principal) + CLI |
+| Dashboard CEO | Ingresos/egresos, pólizas, faltantes, impuestos, no deducibles |
 
 ## Flujo general
 
@@ -133,3 +134,4 @@ mkdir -p fiel/MI_RFC downloads export/contpaqi_add export/reportes state listas
 - `docs/STACK_Y_UI.md` — formato de programación + UI visual
 - `docs/BORRADOR.md` — diseño de módulos y reglas
 - `docs/INVESTIGACION_MERCADO.md` — origen de las features
+- `docs/DASHBOARD_CEO.md` — vista ejecutiva + preview
