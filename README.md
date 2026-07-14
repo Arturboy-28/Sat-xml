@@ -155,3 +155,13 @@ sat-xml descargar --id <IdSolicitud>
 sat-xml sync --tipo recibidos --desde 2026-01-01 --hasta 2026-01-31
 sat-xml exportar contpaqi-add --tipo recibidos --mes 2026-01 --zip
 ```
+
+## Roadmap (investigación de mercado)
+
+Ver `docs/INVESTIGACION_MERCADO.md`.
+
+| Fase | Ideas tomadas de programas tipicos |
+|------|-------------------------------------|
+| **MVP** | WS CFDI, cola de solicitudes, export ADD CONTPAQi |
+| **v1** | Metadata→Excel, filtros, partición rangos, multi-RFC, retenciones |
+| **v2** | Cancelados, faltantes, 69-B, PDF, sync diario |

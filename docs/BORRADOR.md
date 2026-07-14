@@ -106,10 +106,25 @@ state/
 - Escritura directa a SQL Server / Lucene del ADD
 - Generación automática de pólizas en CONTPAQi
 
+## Roadmap de producto (desde investigación de mercado)
+
+Ver detalle en `docs/INVESTIGACION_MERCADO.md`.
+
+**MVP (v0)**  
+WS CFDI + estado de solicitudes + export CONTPAQi ADD.
+
+**v1**  
+Metadata→Excel/CSV, filtros (tipo/complemento/RFC), partición de rangos,
+deduplicación UUID, multi-empresa, retenciones.
+
+**v2**  
+Faltantes metadata vs XML, alerta cancelados, lista 69-B, PDF opcional, sync programado.
+
 ## Criterios para pasar de borrador a código
 
 - [ ] Confirmar FIEL de prueba o productiva disponible
 - [ ] Definir defaults: solo `recibidos` + `CFDI` primero
 - [ ] Definir política de reintentos y polling
 - [ ] Validar con una carga real en CONTPAQi Contabilidad (Analizar directorio)
+- [ ] Congelar alcance MVP vs v1 (ver investigación de mercado)
 - [ ] Implementar módulos en el orden: fiel → auth → solicitud → verificación → descarga → exportador contpaqi → cli
