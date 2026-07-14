@@ -1,0 +1,21 @@
+/*
+ * Tokens ALSUA — del logo oficial IMG_2155.png (sin rediseño).
+ * Wordmark oficial: naranja sobre negro.
+ */
+
+:root {
+  --alsua-orange: #f89e1b;
+  --alsua-orange-deep: #e08a10;
+  --alsua-black: #000000;
+  --alsua-white: #ffffff;
+  --alsua-ink: #111111;
+  --alsua-mute: #6b7280;
+  --alsua-wash: #141414;
+  --alsua-line: #2a2a2a;
+  --ok: #2f9e6e;
+  --warn: #d4a017;
+  --danger: #c45c4a;
+  --font-ui: "Manrope", "Noto Sans", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --radius: 12px;
+}

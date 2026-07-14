@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sat-xml"
+version = "0.1.0"
+description = "Borrador: app web Sat-xml (FastAPI + React) + WS SAT + CONTPAQi"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Arturo Lopez" }]
+dependencies = [
+  "cryptography>=42.0.0",
+  "requests>=2.31.0",
+  "lxml>=5.0.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0.0"]
+# Futuro (cuando se implemente):
+# api = ["fastapi>=0.110.0", "uvicorn[standard]>=0.27.0"]
+# reportes = ["openpyxl>=3.1.0"]
+# pdf = []
+# scheduler = []
+
+# CLI (activar cuando se implemente sat_xml.cli:main):
+# [project.scripts]
+# sat-xml = "sat_xml.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["sat_xml*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
