@@ -1,119 +1,87 @@
-# Stack y dirección visual
+# Stack y dirección visual — marca ALSUA
 
 Documento de decisión. **No es implementación.**
 
-## Formato de programación elegido
+## Formato de programación
 
 | Capa | Tecnología | Motivo |
 |------|------------|--------|
-| Backend | **Python 3.10+** + **FastAPI** | Ideal para FIEL, SOAP SAT, firmas y archivos |
-| Motor SAT | Paquete `sat_xml/` (ya esbozado) | Reutilizable desde API y CLI |
-| Frontend | **Vite + React** | UI moderna, atractiva y rápida |
-| Estilos | CSS propio + variables (sin tema “IA genérico”) | Control total del look |
-| Datos locales | Carpetas + JSON en `state/` | Simple de respaldar |
-| Automatización | CLI (`sat-xml`) + scheduler | Despachos / servidores |
-| Empaque local | App web en `localhost` (abrir en navegador) | Fácil de usar en Windows contable |
+| Backend | **Python 3.10+** + **FastAPI** | FIEL, SOAP SAT, firmas y archivos |
+| Motor SAT | Paquete `sat_xml/` | Reutilizable desde API y CLI |
+| Frontend | **Vite + React** | UI moderna y atractiva |
+| Estilos | CSS propio + tokens ALSUA | Identidad de marca |
+| Datos | Carpetas + JSON en `state/` | Fácil respaldo |
+| Extra | CLI `sat-xml` + scheduler | Automatización |
+| Uso | App web local (`localhost`) | Escritorio contable |
 
-**No usaremos:** Streamlit, Tkinter ni solo terminal como interfaz principal  
-(la CLI queda como complemento para scripts).
+## Marca: ALSUA
 
-## Arquitectura UI
+La interfaz lleva la identidad **ALSUA** (no un look genérico).
+
+### Emblema
+
+- Círculo naranja con **A** blanca inclinada
+- Wordmark **LSUA** en naranja, bold itálico sans
+- Marca registrada ®
+
+Colocar el archivo oficial en:
 
 ```text
-Navegador (UI React)
-      │  HTTP / JSON
-      ▼
-FastAPI (API local)
-      │
-      ├─► sat_xml (WS SAT, FIEL, export, auditoría)
-      ├─► downloads / export / state
-      └─► CONTPAQi ADD (carpeta/ZIP listos)
+web/public/brand/alsua-logo.png
 ```
 
-## Dirección visual (marca Sat-xml)
-
-Objetivo: que se sienta como una **herramienta profesional de despacho**,
-no como un dashboard genérico ni un portal gubernamental gris.
-
-### Identidad
-
-- Nombre hero: **Sat-xml**
-- Tagline corto: “Descarga masiva CFDI → Almacén Digital”
-- Atmósfera: formal, limpia, con carácter
-
-### Paleta (propuesta)
+### Paleta ALSUA
 
 ```css
---ink: #0e1a17;          /* fondo profundo */
---panel: #162420;        /* paneles */
---line: #2a3d36;         /* bordes suaves */
---mist: #d7e3dc;         /* texto secundario */
---paper: #f3f6f2;        /* texto principal sobre oscuro / fondos claros */
---accent: #c4a35a;       /* dorado oliva — CTAs (no púrpura) */
---ok: #3d9a6a;
+--alsua-orange: #F89D2D;   /* primaria / CTAs */
+--alsua-orange-deep: #e07f10;
+--alsua-white: #ffffff;
+--alsua-ink: #1a1a1a;      /* texto */
+--alsua-mute: #6b7280;     /* secundario */
+--alsua-wash: #fff7ed;     /* fondo cálido suave */
+--alsua-line: #f0e6d8;     /* bordes */
+--ok: #2f9e6e;
 --warn: #d4a017;
 --danger: #c45c4a;
 ```
 
 ### Tipografía
 
-- Display / títulos: **Fraunces** o **Libre Baskerville** (carácter, no Inter)
-- UI / cuerpo: **Source Sans 3** o **IBM Plex Sans**
-- Mono (UUID, logs): **IBM Plex Mono**
+- Marca / display: sans bold itálica (estilo del logo ALSUA) — p. ej. **Archivo Black Italic** / **Inter Tight Black Italic**
+- UI: **Manrope** o **Plus Jakarta Sans**
+- Mono (UUID / logs): **IBM Plex Mono**
 
-### Composición de pantallas
+### Atmósfera
 
-1. **Home / empresas** — marca Sat-xml grande, lista de RFC, CTA “Sincronizar”
-2. **Sync** — una sola tarea: rango + tipo + botón; progreso visible
-3. **Inventario** — tabla limpia de CFDI (sin cards decorativos)
-4. **Export CONTPAQi** — flujo claro de 3 pasos
-5. **Auditoría** — hallazgos (faltantes / cancelados / 69-B)
-6. **Reportes** — descarga Excel/CSV
+- Fondo: blanco / wash naranja muy suave (no púrpura, no forestal oscuro)
+- Acento dominante: naranja ALSUA
+- Formas: esquinas redondeadas moderadas (como el logo)
+- Motion: CTAs con leve inclinación/energía, progreso de sync fluido
+- Hero: logo ALSUA a tamaño marca + producto “Descarga masiva CFDI”
 
-Reglas de UI:
+## Pantallas
 
-- Primera vista = una composición (no dashboard saturado)
-- Sin chips/badges flotantes sobre el hero
-- Motion sutil: transición de paneles, barra de progreso de sync, fade de resultados
-- Responsive: usable en laptop contable y pantalla ancha
+1. **Home** — logo ALSUA hero, empresas, CTA naranja “Sincronizar”
+2. **Sync** — rango + tipo + progreso
+3. **Inventario** — tabla limpia
+4. **Export CONTPAQi** — 3 pasos
+5. **Auditoría** — faltantes / cancelados / 69-B
+6. **Reportes** — Excel/CSV
 
-## Estructura de carpetas (frontend)
+Reglas:
+
+- La marca ALSUA debe dominar la primera vista (no solo un icono en nav)
+- Una composición clara; sin dashboard saturado
+- Sin badges flotantes sobre el hero
+- Un CTA principal naranja por pantalla
+
+## Estructura UI
 
 ```text
-web/                 # React + Vite
-  index.html
+web/
+  public/brand/alsua-logo.png
   src/
-    main.tsx
-    App.tsx
-    styles/
-      tokens.css     # variables de marca
-      app.css
-    pages/
-      Empresas.tsx
-      Sync.tsx
-      Inventario.tsx
-      ExportContpaqi.tsx
-      Auditoria.tsx
-      Reportes.tsx
-    components/
-api/                 # FastAPI (o sat_xml/api.py)
-  main.py            # uvicorn entry
-```
-
-## Experiencia de uso objetivo
-
-1. Abrir app → ver **Sat-xml** y tus empresas
-2. Elegir RFC → Sync recibidos del mes
-3. Ver progreso en vivo (solicitud → verificación → descarga)
-4. Un clic: **Exportar a CONTPAQi**
-5. Revisar auditoría / bajar Excel
-
-## Qué queda en CLI
-
-Mismos flujos para automatizar:
-
-```bash
-sat-xml sync --rfc ... --desde ... --hasta ...
-sat-xml exportar contpaqi-add --rfc ... --mes ...
-sat-xml auditar 69b --rfc ...
+    styles/tokens.css
+    pages/...
+sat_xml/api.py          # FastAPI
 ```

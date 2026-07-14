@@ -1,20 +1,21 @@
 /*
- * Tokens de marca Sat-xml (borrador visual).
- * Paleta: tinta forestal + acento dorado oliva.
- * Tipografías previstas: Fraunces (display) + Source Sans 3 (UI).
+ * Tokens de marca ALSUA (borrador visual).
+ * Naranja energético + blanco; tipografía sans bold itálica para marca.
  */
 
 :root {
-  --ink: #0e1a17;
-  --panel: #162420;
-  --line: #2a3d36;
-  --mist: #d7e3dc;
-  --paper: #f3f6f2;
-  --accent: #c4a35a;
-  --ok: #3d9a6a;
+  --alsua-orange: #f89d2d;
+  --alsua-orange-deep: #e07f10;
+  --alsua-white: #ffffff;
+  --alsua-ink: #1a1a1a;
+  --alsua-mute: #6b7280;
+  --alsua-wash: #fff7ed;
+  --alsua-line: #f0e6d8;
+  --ok: #2f9e6e;
   --warn: #d4a017;
   --danger: #c45c4a;
-  --font-display: "Fraunces", Georgia, serif;
-  --font-ui: "Source Sans 3", "Segoe UI", sans-serif;
+  --font-brand: "Archivo Black", "Arial Black", sans-serif;
+  --font-ui: "Manrope", "Segoe UI", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --radius: 12px;
 }

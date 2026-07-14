@@ -12,10 +12,10 @@ de auditoría.
 | Capa | Stack |
 |------|--------|
 | Backend | Python + FastAPI + paquete `sat_xml/` |
-| Frontend | Vite + React (UI principal) |
+| Frontend | Vite + React — UI marca **ALSUA** (naranja #F89D2D) |
 | Extra | CLI `sat-xml` para automatización |
 
-Detalle visual y pantallas: [`docs/STACK_Y_UI.md`](docs/STACK_Y_UI.md)
+Detalle visual y pantallas (marca **ALSUA**): [`docs/STACK_Y_UI.md`](docs/STACK_Y_UI.md)
 
 ## Alcance (todo el roadmap)
 
