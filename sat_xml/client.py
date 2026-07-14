@@ -1,1 +1,1 @@
-"""API de alto nivel que orquesta autenticación → solicitud → verificación → descarga."""
+"""Orquestación del flujo Web Service (pendiente)."""

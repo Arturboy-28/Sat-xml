@@ -1,1 +1,1 @@
-"""Solicitud de descarga: emitidos, recibidos y por folio (WS 1.5)."""
+"""Solicitud WS 1.5: SolicitaDescargaEmitidos / Recibidos / Folio (pendiente)."""

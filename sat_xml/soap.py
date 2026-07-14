@@ -1,1 +1,1 @@
-"""Cliente SOAP y utilidades de firma para el Web Service del SAT."""
+"""Cliente SOAP del Web Service SAT y utilidades de firma (pendiente)."""

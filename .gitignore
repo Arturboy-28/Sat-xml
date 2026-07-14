@@ -19,5 +19,6 @@ fiel/**
 *.p12
 .DS_Store
 *.zip
-state/
+state/**
+!state/.gitkeep
 *.json.bak

@@ -1,1 +1,1 @@
-"""Interfaz de línea de comandos."""
+"""CLI del cliente Web Service SAT (pendiente)."""

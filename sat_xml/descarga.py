@@ -1,1 +1,1 @@
-"""Descarga de paquetes ZIP y extracción de XML."""
+"""Descarga WS: Descargar paquete ZIP y extraer XML (pendiente)."""

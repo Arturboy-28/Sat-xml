@@ -1,1 +1,1 @@
-"""Autenticación WS-Security con FIEL → token WRAP."""
+"""Autenticación vía Web Service SAT: Autentica → token WRAP (pendiente)."""

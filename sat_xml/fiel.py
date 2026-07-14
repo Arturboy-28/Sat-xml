@@ -1,1 +1,1 @@
-"""Carga de e.firma (FIEL): certificado .cer, llave .key y contraseña."""
+"""Carga de e.firma (FIEL) para firmar peticiones del Web Service (pendiente)."""
