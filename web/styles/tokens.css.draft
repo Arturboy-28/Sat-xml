@@ -1,21 +1,21 @@
 /*
- * Tokens de marca ALSUA (borrador visual).
- * Naranja energético + blanco; tipografía sans bold itálica para marca.
+ * Tokens ALSUA — respetan el logo oficial.
+ * Naranja exacto del emblema: #F89D2D
  */
 
 :root {
   --alsua-orange: #f89d2d;
-  --alsua-orange-deep: #e07f10;
+  --alsua-orange-deep: #e08a1c;
   --alsua-white: #ffffff;
   --alsua-ink: #1a1a1a;
   --alsua-mute: #6b7280;
-  --alsua-wash: #fff7ed;
-  --alsua-line: #f0e6d8;
+  --alsua-wash: #fff8f0;
+  --alsua-line: #f0e4d4;
   --ok: #2f9e6e;
   --warn: #d4a017;
   --danger: #c45c4a;
-  --font-brand: "Archivo Black", "Arial Black", sans-serif;
-  --font-ui: "Manrope", "Segoe UI", sans-serif;
+  --font-brand: "Noto Sans", "Arial Black", sans-serif; /* bold italic en marca */
+  --font-ui: "Manrope", "Noto Sans", "Segoe UI", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   --radius: 12px;
 }

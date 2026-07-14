@@ -30,21 +30,19 @@ Archivos de marca en el repo:
 web/public/brand/alsua-logo.png
 web/public/brand/alsua-logo.svg
 ```
-### Paleta ALSUA
+### Paleta ALSUA (del logo)
 
 ```css
---alsua-orange: #F89D2D;   /* primaria / CTAs */
---alsua-orange-deep: #e07f10;
+--alsua-orange: #F89D2D;   /* exacto del emblema — no alterar */
+--alsua-orange-deep: #e08a1c;
 --alsua-white: #ffffff;
---alsua-ink: #1a1a1a;      /* texto */
---alsua-mute: #6b7280;     /* secundario */
---alsua-wash: #fff7ed;     /* fondo cálido suave */
---alsua-line: #f0e6d8;     /* bordes */
---ok: #2f9e6e;
---warn: #d4a017;
---danger: #c45c4a;
+--alsua-ink: #1a1a1a;
+--alsua-mute: #6b7280;
+--alsua-wash: #fff8f0;
+--alsua-line: #f0e4d4;
 ```
 
+Usar siempre los archivos en `web/public/brand/` (no reinventar el logo en CSS).
 ### Tipografía
 
 - Marca / display: sans bold itálica (estilo del logo ALSUA) — p. ej. **Archivo Black Italic** / **Inter Tight Black Italic**

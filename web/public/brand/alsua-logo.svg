@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 240" role="img" aria-label="ALSUA">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 260" role="img" aria-label="ALSUA">
   <title>ALSUA</title>
-  <!-- Emblema -->
-  <g transform="translate(20 20)">
-    <circle cx="100" cy="100" r="100" fill="#F89D2D"/>
-    <path
+  <!--
+    Recreación fiel del logo ALSUA:
+    - Círculo naranja #F89D2D con A blanca bold itálica
+    - Wordmark LSUA en el mismo naranja / peso / inclinación
+    - ® superior derecha
+  -->
+  <g transform="translate(10 10)">
+    <circle cx="120" cy="120" r="120" fill="#F89D2D"/>
+    <text
+      x="120" y="168"
+      text-anchor="middle"
       fill="#FFFFFF"
-      transform="translate(100 100) skewX(-12) translate(-100 -100)"
-      d="M100 38 L148 162 H124 L114 132 H86 L76 162 H52 Z M92 108 H108 L100 84 Z"
-    />
+      font-family="Noto Sans, Arial Black, Arial, sans-serif"
+      font-size="168"
+      font-weight="900"
+      font-style="italic"
+    >A</text>
   </g>
-  <!-- Wordmark LSUA -->
-  <g fill="#F89D2D" transform="translate(240 48) skewX(-12)">
-    <!-- L -->
-    <path d="M8 0 H40 V118 H96 V150 H8 Z"/>
-    <!-- S -->
-    <path d="M118 22c0-16 14-28 40-28 20 0 36 8 46 20l-22 20c-6-6-14-10-24-10-8 0-12 3-12 8 0 6 4 9 18 14l12 4c28 10 42 24 42 50 0 30-24 46-56 46-26 0-46-10-58-26l24-20c8 8 18 14 34 14 12 0 18-4 18-12 0-7-5-11-20-16l-12-4c-28-10-42-26-42-50z"/>
-    <!-- U -->
-    <path d="M204 0 H236 V96 c0 28 14 42 38 42s38-14 38-42 V0 H344 V100 c0 52-34 84-70 84s-70-32-70-84z"/>
-    <!-- A -->
-    <path d="M372 150 L420 0 H452 L500 150 H468 L456 112 H416 L404 150 Z M424 88 H448 L436 52 Z"/>
-  </g>
-  <!-- � -->
-  <g transform="translate(678 42)" fill="#F89D2D">
-    <circle cx="12" cy="12" r="11" fill="none" stroke="#F89D2D" stroke-width="2.5"/>
-    <text x="12" y="16.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700">R</text>
+  <text
+    x="270" y="178"
+    fill="#F89D2D"
+    font-family="Noto Sans, Arial Black, Arial, sans-serif"
+    font-size="148"
+    font-weight="900"
+    font-style="italic"
+    letter-spacing="-2"
+  >LSUA</text>
+  <g transform="translate(750 48)" fill="#F89D2D">
+    <circle cx="14" cy="14" r="13" fill="none" stroke="#F89D2D" stroke-width="3"/>
+    <text x="14" y="19" text-anchor="middle"
+      font-family="Noto Sans, Arial, sans-serif"
+      font-size="14" font-weight="700">R</text>
   </g>
 </svg>
