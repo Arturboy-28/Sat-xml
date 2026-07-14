@@ -1,17 +1,15 @@
-Logo ALSUA — respetar diseño oficial.
+# Marca ALSUA
 
-## Archivos
+Usar **solo** estos archivos (diseño oficial del logo). No redibujar ni recolorear.
 
 | Archivo | Uso |
 |---------|-----|
-| `alsua-logo.png` | Wordmark completo (círculo A + LSUA®) |
-| `alsua-logo.svg` | Mismo wordmark en vector |
-| `alsua-mark.png` | Solo emblema (círculo + A), fondo transparente |
+| `alsua-logo.png` | Wordmark completo (canónico) |
+| `alsua-logo.svg` | Referencia al PNG |
+| `alsua-mark.png` | Emblema circular + A (fondo transparente) |
 
-## Reglas de uso
+## Reglas
 
-- Color de marca: **`#F89D2D`** (no sustituir por otros naranjas)
-- No estirar, no recolorear, no quitar la ®
-- Mantener proporción del wordmark
-- Sobre fondos oscuros usar versión con suficiente contraste o solo el mark
-- En UI: hero y nav usan estos archivos; no redibujar el logo con CSS ad hoc
+- Color del logo: naranja del archivo (aprox. `#F89D2D` / `#F9A02E`)
+- No estirar, no cambiar tipografía, no quitar ®
+- Mantener proporciones del wordmark

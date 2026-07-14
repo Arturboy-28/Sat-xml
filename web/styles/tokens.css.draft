@@ -4,8 +4,8 @@
  */
 
 :root {
-  --alsua-orange: #f89d2d;
-  --alsua-orange-deep: #e08a1c;
+  --alsua-orange: #f89928; /* muestreado del logo oficial */
+  --alsua-orange-deep: #e08616;
   --alsua-white: #ffffff;
   --alsua-ink: #1a1a1a;
   --alsua-mute: #6b7280;

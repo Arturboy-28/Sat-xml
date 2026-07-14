@@ -33,8 +33,8 @@ web/public/brand/alsua-logo.svg
 ### Paleta ALSUA (del logo)
 
 ```css
---alsua-orange: #F89D2D;   /* exacto del emblema — no alterar */
---alsua-orange-deep: #e08a1c;
+--alsua-orange: #F89928;   /* del logo oficial — no alterar */
+--alsua-orange-deep: #e08616;
 --alsua-white: #ffffff;
 --alsua-ink: #1a1a1a;
 --alsua-mute: #6b7280;
