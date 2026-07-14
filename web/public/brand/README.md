@@ -1,15 +1,19 @@
-# Marca ALSUA
+# Marca ALSUA — archivo oficial
 
-Usar **solo** estos archivos (diseño oficial del logo). No redibujar ni recolorear.
+Coloca aquí **exactamente** el logo que enviaste (sin rediseños):
 
-| Archivo | Uso |
-|---------|-----|
-| `alsua-logo.png` | Wordmark completo (canónico) |
-| `alsua-logo.svg` | Referencia al PNG |
-| `alsua-mark.png` | Emblema circular + A (fondo transparente) |
+```text
+web/public/brand/alsua-logo.png
+```
 
-## Reglas
+Opcional:
+```text
+web/public/brand/alsua-mark.png   # solo el círculo con A, si lo tienes aparte
+```
 
-- Color del logo: naranja del archivo (aprox. `#F89D2D` / `#F9A02E`)
-- No estirar, no cambiar tipografía, no quitar ®
-- Mantener proporciones del wordmark
+## Cómo hacerlo
+
+1. Arrastra tu PNG/SVG oficial a esta carpeta, o
+2. En el chat: adjunta el archivo como fichero del proyecto (no solo pegado como imagen).
+
+No regenerar ni redibujar el logo.
