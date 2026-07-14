@@ -1,5 +1,7 @@
-Coloca aquí el logo oficial ALSUA:
+Logo oficial ALSUA para la UI.
 
-- alsua-logo.png (o .svg)
+Archivos:
+- `alsua-logo.png` — raster
+- `alsua-logo.svg` — vector
 
-Usado en la UI web (hero + nav).
+Uso previsto: hero y navegación de la app web.

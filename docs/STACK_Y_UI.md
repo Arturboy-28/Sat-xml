@@ -24,12 +24,12 @@ La interfaz lleva la identidad **ALSUA** (no un look genérico).
 - Wordmark **LSUA** en naranja, bold itálico sans
 - Marca registrada ®
 
-Colocar el archivo oficial en:
+Archivos de marca en el repo:
 
 ```text
 web/public/brand/alsua-logo.png
+web/public/brand/alsua-logo.svg
 ```
-
 ### Paleta ALSUA
 
 ```css
