@@ -18,44 +18,43 @@ Documento de decisión. **No es implementación.**
 
 La interfaz lleva la identidad **ALSUA** (no un look genérico).
 
-### Emblema
+### Emblema (logo oficial `IMG_2155.png`)
 
-- Círculo naranja con **A** blanca inclinada
-- Wordmark **LSUA** en naranja, bold itálico sans
+- Círculo naranja con **A** en negativo (fondo negro)
+- Wordmark **LSUA** naranja, bold itálico
 - Marca registrada ®
+- **No rediseñar**: usar el archivo original
 
-Archivos de marca en el repo:
+Archivos:
 
 ```text
-web/public/brand/alsua-logo.png
-web/public/brand/alsua-logo.svg
+IMG_2155.png                      # subido por el usuario
+web/public/brand/alsua-logo.png   # copia exacta byte a byte
 ```
-### Paleta ALSUA (del logo)
+
+### Paleta ALSUA (del logo oficial)
 
 ```css
---alsua-orange: #F89928;   /* del logo oficial — no alterar */
---alsua-orange-deep: #e08616;
+--alsua-orange: #F89E1B;   /* del logo — no alterar */
+--alsua-black: #000000;    /* fondo del wordmark */
 --alsua-white: #ffffff;
---alsua-ink: #1a1a1a;
+--alsua-ink: #111111;
 --alsua-mute: #6b7280;
---alsua-wash: #fff8f0;
---alsua-line: #f0e4d4;
+--alsua-wash: #141414;     /* UI oscura para respetar el logo */
+--alsua-line: #2a2a2a;
 ```
 
-Usar siempre los archivos en `web/public/brand/` (no reinventar el logo en CSS).
 ### Tipografía
 
-- Marca / display: sans bold itálica (estilo del logo ALSUA) — p. ej. **Archivo Black Italic** / **Inter Tight Black Italic**
+- Marca: el PNG oficial (nunca texto CSS fingiendo el logo)
 - UI: **Manrope** o **Plus Jakarta Sans**
-- Mono (UUID / logs): **IBM Plex Mono**
+- Mono: **IBM Plex Mono**
 
 ### Atmósfera
 
-- Fondo: blanco / wash naranja muy suave (no púrpura, no forestal oscuro)
-- Acento dominante: naranja ALSUA
-- Formas: esquinas redondeadas moderadas (como el logo)
-- Motion: CTAs con leve inclinación/energía, progreso de sync fluido
-- Hero: logo ALSUA a tamaño marca + producto “Descarga masiva CFDI”
+- Fondo oscuro cercano al negro del logo
+- Acento naranja ALSUA
+- Hero: logo oficial a tamaño marca + producto “Descarga masiva CFDI”
 
 ## Pantallas
 
