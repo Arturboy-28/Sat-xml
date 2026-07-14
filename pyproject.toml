@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "sat-xml"
 version = "0.1.0"
-description = "Borrador: descarga masiva de XML CFDI vía Web Service SAT 1.5 (FIEL)"
+description = "Borrador: descarga WS SAT 1.5 + exportador Almacén Digital CONTPAQi Contabilidad"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

@@ -1,1 +1,1 @@
-"""Orquestación del flujo Web Service (pendiente)."""
+"""Orquestación: Web Service SAT → XML → exportador CONTPAQi ADD (pendiente)."""

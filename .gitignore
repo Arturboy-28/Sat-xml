@@ -11,6 +11,10 @@ venv/
 .mypy_cache/
 downloads/**
 !downloads/.gitkeep
+export/**
+!export/contpaqi_add/
+!export/contpaqi_add/.gitkeep
+!export/contpaqi_add/README.md
 fiel/**
 !fiel/.gitkeep
 *.cer

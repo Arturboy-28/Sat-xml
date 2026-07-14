@@ -1,1 +1,1 @@
-"""CLI del cliente Web Service SAT (pendiente)."""
+"""CLI: sync WS SAT y exportar a CONTPAQi Almacén Digital (pendiente)."""

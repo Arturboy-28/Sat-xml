@@ -1,7 +1,8 @@
 # Sat-xml (borrador)
 
 Borrador de un sistema de **descarga masiva de XML CFDI** usando solo el
-**Web Service del SAT v1.5** (e.firma / FIEL).
+**Web Service del SAT v1.5** (e.firma / FIEL), con **exportador** hacia el
+**Almacén Digital (ADD) de CONTPAQi Contabilidad**.
 
 > No usa portal web ni CIEC.  
 > Estado: **borrador / esqueleto**. Sin lógica programada.
@@ -13,6 +14,7 @@ Borrador de un sistema de **descarga masiva de XML CFDI** usando solo el
 | WS Autenticación, Solicitud, Verificación, Descarga | Scraping del portal SAT |
 | CFDI emitidos / recibidos / por folio | Límite de 2,000 XML/día del portal |
 | Extracción de paquetes ZIP → XML | Timbrado o cancelación de CFDI |
+| Exportador CONTPAQi ADD (carpeta/ZIP) | Integración SQL directa al ADD |
 | CLI futura | UI / dashboard |
 
 ## Endpoints SAT (producción CFDI)
@@ -45,11 +47,49 @@ FIEL (.cer + .key)
 3. VerificaSolicitud ──────► Estado + IdsPaquetes
       │  (poll hasta Terminada)
       ▼
-4. Descargar ──────────────► ZIP (base64)
+4. Descargar ──────────────► ZIP SAT
       │
       ▼
-5. Extraer XML en downloads/
+5. Extraer XML
+      │
+      ▼
+6. Exportar CONTPAQi ADD ──► carpeta / ZIP listos para importar
 ```
+
+## Exportador CONTPAQi Contabilidad (ADD)
+
+Objetivo: dejar XML listos para cargar en el **Administrador de Documentos
+Digitales / Almacén Digital** de CONTPAQi Contabilidad.
+
+### Cómo se importa en CONTPAQi (referencia)
+
+1. Abrir empresa (RFC debe coincidir con los XML).
+2. `Empresa` → `Administrador del Almacén Digital` (o Visor de documentos digitales).
+3. `Analizar directorio` / `Cargar XML` apuntando a la carpeta o ZIP generado.
+4. Revisar pestaña **Válidos** → `Importar todos`.
+
+### Salida prevista del exportador
+
+```text
+export/contpaqi_add/
+  {RFC}/
+    recibidos/
+      2026-01/
+        {UUID}.xml
+    emitidos/
+      2026-01/
+        {UUID}.xml
+    contpaqi_add_recibidos_2026-01.zip   # XML en la raíz del ZIP
+    manifiesto.csv                      # UUID, tipo, fecha, RFCs, ruta
+```
+
+Reglas de diseño:
+
+- XML **sueltos** (no anidados en subcarpetas dentro del ZIP de importación).
+- Nombre de archivo = **UUID** del CFDI.
+- Filtrar por RFC de la empresa (emisor o receptor según emitidos/recibidos).
+- Opcional: solo CFDI vigentes; excluir cancelados si se pidió metadata.
+- No escribe en la base SQL del ADD: solo prepara archivos para importación manual/asistida.
 
 ## Límites relevantes del WS
 
@@ -65,21 +105,26 @@ FIEL (.cer + .key)
 sat_xml/
   __init__.py
   __main__.py
-  fiel.py           # (pendiente) carga FIEL
-  models.py         # (pendiente) enums / resultados
-  soap.py           # (pendiente) HTTP SOAP + firma
-  auth.py           # (pendiente) Autentica → token
-  solicitud.py      # (pendiente) Emitidos/Recibidos/Folio
-  verificacion.py   # (pendiente) VerificaSolicitud
-  descarga.py       # (pendiente) Descargar + unzip
-  client.py         # (pendiente) orquestación
-  cli.py            # (pendiente) comandos
+  fiel.py
+  models.py
+  soap.py
+  auth.py
+  solicitud.py
+  verificacion.py
+  descarga.py
+  client.py
+  cli.py
+  exportadores/
+    __init__.py
+    contpaqi_add.py   # exportador Almacén Digital CONTPAQi
 docs/
-  BORRADOR.md       # diseño detallado
+  BORRADOR.md
 examples/
   .env.example
-fiel/               # FIEL local (no versionar)
+fiel/
 downloads/
+export/               # salida para CONTPAQi
+state/
 tests/
 ```
 
@@ -88,6 +133,7 @@ tests/
 - Python 3.10+
 - FIEL vigente: `.cer`, `.key`, contraseña
 - Dependencias planeadas: `cryptography`, `requests`, `lxml`
+- CONTPAQi Contabilidad con Almacén Digital (ADD) creado y RFC correcto
 
 ## Setup (cuando se implemente)
 
@@ -107,4 +153,5 @@ sat-xml solicitar --tipo recibidos --desde 2026-01-01 --hasta 2026-01-31
 sat-xml verificar --id <IdSolicitud>
 sat-xml descargar --id <IdSolicitud>
 sat-xml sync --tipo recibidos --desde 2026-01-01 --hasta 2026-01-31
+sat-xml exportar contpaqi-add --tipo recibidos --mes 2026-01 --zip
 ```
