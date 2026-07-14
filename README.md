@@ -23,7 +23,7 @@ Detalle visual y pantallas (marca **ALSUA**): [`docs/STACK_Y_UI.md`](docs/STACK_
 |------|---------|
 | Descarga WS | CFDI + Metadata + Retenciones; emitidos / recibidos / folio |
 | Filtros | Tipo I/E/T/N/P, complemento, estado, RFC contraparte, a cuenta terceros |
-| Operación | Partición de rangos, cola/historial, reanudación, dedupe UUID |
+| Operación | Preflight Metadata → auto o tramos (%, ETA), cola, dedupe UUID |
 | Multi-empresa | Varias FIEL (`fiel/{rfc}/`) |
 | Contabilidad | Export Almacén Digital (ADD) CONTPAQi Contabilidad |
 | Reportes | Metadata → Excel/CSV; manifiesto de export |
@@ -135,3 +135,4 @@ mkdir -p fiel/MI_RFC downloads export/contpaqi_add export/reportes state listas
 - `docs/BORRADOR.md` — diseño de módulos y reglas
 - `docs/INVESTIGACION_MERCADO.md` — origen de las features
 - `docs/DASHBOARD_CEO.md` — vista ejecutiva + preview
+- `docs/DESCARGA_AUTOMATICA.md` — sync inteligente con tramos/%/ETA

@@ -1,1 +1,1 @@
-"""Partición automática de rangos de fechas (tope ~200k / error 5003) (pendiente)."""
+"""Partición automática de rangos según conteo Metadata (≤200k XML/tramo) (pendiente)."""
