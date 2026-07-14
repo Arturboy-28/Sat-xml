@@ -102,7 +102,8 @@ librerías PhpCfdi/NodeCfdi/satcfdi, etc.) para enriquecer el borrador de Sat-xm
 - PhpCfdi / NodeCfdi sat-ws-descarga-masiva (filtros WS 1.5, retenciones)
 - Documentación SAT descarga masiva (metadata TXT, topes, reglas cancelados)
 
-## Decisión sugerida
+## Decisión
 
-Mantener el borrador centrado en **WS + export CONTPAQi**, y documentar el backlog
-v1/v2 arriba para no inflar el MVP.
+El borrador incorpora **todo el roadmap** (MVP + v1 + v2) en estructura y
+documentación. La implementación se hará por fases según
+`docs/BORRADOR.md` (orden de módulos), pero el alcance del producto queda completo.

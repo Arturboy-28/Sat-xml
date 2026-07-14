@@ -1,1 +1,1 @@
-"""Orquestación: Web Service SAT → XML → exportador CONTPAQi ADD (pendiente)."""
+"""Orquestación completa: WS → inventario → CONTPAQi → reportes → auditoría (pendiente)."""

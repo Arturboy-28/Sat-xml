@@ -1,1 +1,1 @@
-"""Exportador hacia Almacén Digital / ADD de CONTPAQi Contabilidad (pendiente)."""
+"""Exportadores hacia sistemas contables (CONTPAQi ADD, etc.)."""

@@ -1,1 +1,1 @@
-"""Modelos del Web Service: tipos de solicitud, estados, resultados (pendiente)."""
+"""Modelos del Web Service y auditorías: tipos, estados, resultados (pendiente)."""

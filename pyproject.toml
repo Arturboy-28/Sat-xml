@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "sat-xml"
 version = "0.1.0"
-description = "Borrador: descarga WS SAT 1.5 + exportador Almacén Digital CONTPAQi Contabilidad"
+description = "Borrador completo: WS SAT 1.5, CONTPAQi ADD, metadata, auditoría y sync"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
@@ -18,6 +18,10 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0.0"]
+# Futuro (cuando se implemente):
+# reportes = ["openpyxl>=3.1.0"]
+# pdf = ["casaone-cfdi-pdf"]  # o librería PDF elegida
+# scheduler = []
 
 # CLI (activar cuando se implemente sat_xml.cli:main):
 # [project.scripts]

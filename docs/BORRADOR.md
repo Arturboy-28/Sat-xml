@@ -1,130 +1,121 @@
-# Borrador de diseño — Descarga masiva SAT (Web Service 1.5)
+# Borrador de diseño completo — Sat-xml
 
-Documento de diseño. **No es implementación.**
+Documento de diseño. **No es implementación.**  
+Alcance: **todo el roadmap** (núcleo WS + CONTPAQi + reportes + auditoría + sync).
 
-## Decisión de arquitectura
+## Arquitectura
 
-- Canal: **solo Web Service** del SAT.
-- Auth: **e.firma (FIEL)**, no CIEC ni portal.
-- Transporte: SOAP + WS-Security / firma XML.
-- Token: header `Authorization: WRAP access_token="..."`.
-- Destino contable: **exportador** para Almacén Digital (ADD) de
-  **CONTPAQi Contabilidad** (archivos listos para importar; sin tocar SQL del ADD).
+- Canal: Web Service SAT 1.5 (CFDI y Retenciones).
+- Auth: e.firma (FIEL), multi-empresa.
+- Sin portal / sin CIEC.
+- Persistencia local: archivos + `state/` (JSON).
+- Destinos: disco organizado, CONTPAQi ADD, Excel/CSV, PDF opcional.
 
-## Módulos previstos
+## Mapa de módulos
 
 | Módulo | Responsabilidad |
 |--------|-----------------|
-| `fiel` | Leer `.cer`/`.key`, RFC, firmar SHA1-RSA |
-| `soap` | POST SOAP, parseo XML, firmas de solicitud |
-| `auth` | Operación `Autentica` → token |
-| `solicitud` | Emitidos / Recibidos / Folio |
-| `verificacion` | Polling de `EstadoSolicitud` e `IdsPaquetes` |
-| `descarga` | `Descargar` paquete + guardar ZIP/XML |
-| `exportadores.contpaqi_add` | Empaquetar XML para Almacén Digital CONTPAQi |
-| `client` | Orquestar descarga + export |
-| `cli` | Comandos de usuario |
+| `empresas` | Registro multi-RFC / rutas FIEL |
+| `fiel` | Cargar .cer/.key, firmar |
+| `soap` | HTTP SOAP + firmas |
+| `auth` | Token WRAP (CFDI y Retenciones) |
+| `solicitud` | SolicitaDescargaEmitidos/Recibidos/Folio |
+| `retenciones` | Mismo flujo en hosts de retenciones |
+| `verificacion` | Estados 1–6 + IdsPaquetes |
+| `descarga` | Descargar ZIP y extraer |
+| `particion` | Cortar rangos por mes/día ante tope 200k / 5003 |
+| `estado` | Cola IdSolicitud, reanudación, anti-duplicado 5005 |
+| `inventario` | Índice UUID → ruta; dedupe |
+| `metadata` | Parsear TXT metadata (~) a registros |
+| `reportes.excel_csv` | Exportar listados a Excel/CSV |
+| `exportadores.contpaqi_add` | Carpeta/ZIP para Almacén Digital |
+| `auditoria.faltantes` | Metadata vs XML en disco |
+| `auditoria.cancelados` | Detectar cancelaciones vía metadata |
+| `auditoria.lista_69b` | Cruzar RFC vs listas SAT 69/69-B |
+| `pdf` | Representación impresa (opcional) |
+| `scheduler` | Sync diario (cron / tarea) |
+| `client` | Orquestación end-to-end |
+| `cli` | Interfaz de comandos |
 
-## Contratos (entrada / salida)
+## Contratos principales
 
-### Autenticación
-- Entrada: FIEL
-- Salida: token WRAP (vida corta; renovar al expirar)
+### Auth
+Entrada FIEL → token WRAP (renovar al expirar).
 
 ### Solicitud
-- Entrada: rango de fechas, tipo (emitidos/recibidos/folio), `TipoSolicitud` CFDI|Metadata, filtros opcionales
-- Salida: `IdSolicitud`, `CodEstatus`, `Mensaje`
+Entrada: fechas, dirección (emitidos/recibidos/folio), `CFDI|Metadata`,
+filtros (tipo comprobante, complemento, estado, RFC, a cuenta terceros).  
+Salida: `IdSolicitud`.
 
 ### Verificación
-- Entrada: `IdSolicitud`
-- Salida: estado (`1..6`), número de CFDIs, lista de paquetes
-
-Estados:
-
-1. Aceptada  
-2. En proceso  
-3. Terminada  
-4. Error  
-5. Rechazada  
-6. Vencida  
+Estados: 1 Aceptada, 2 En proceso, 3 Terminada, 4 Error, 5 Rechazada, 6 Vencida.
 
 ### Descarga
-- Entrada: `IdPaquete`
-- Salida: bytes del ZIP (CFDI o Metadata)
+`IdPaquete` → ZIP (XML o metadata TXT).
 
-### Exportador CONTPAQi ADD
-- Entrada: carpeta de XML descargados, RFC empresa, tipo (emitidos/recibidos), periodo
-- Salida:
-  - Carpeta plana o por periodo con `{UUID}.xml`
-  - ZIP opcional con XML **en la raíz** (formato que CONTPAQi suele aceptar al cargar)
-  - `manifiesto.csv` (auditoría: UUID, fecha, RFCs, total, ruta)
-- Uso en CONTPAQi Contabilidad:
-  1. Empresa con RFC correcto y ADD creado
-  2. `Empresa` → `Administrador del Almacén Digital`
-  3. `Analizar directorio` sobre la carpeta/ZIP exportada
-  4. Pestaña `Válidos` → `Importar todos`
+### Metadata
+Archivo TXT delimado por `~` → registros con UUID, RFCs, nombres, PAC,
+fechas, monto, efecto, estatus, fecha cancelación.
 
-## Reglas de negocio a respetar
+### Export CONTPAQi ADD
+Carpeta/`{UUID}.xml` + ZIP con XML en raíz + `manifiesto.csv`.  
+Uso: Administrador del Almacén Digital → Analizar directorio → Importar todos.
 
-1. Para XML recibidos: `EstadoComprobante=Vigente`.
-2. Atributos firmados de `solicitud` en **orden alfabético**.
-3. Partir rangos de fechas si una consulta supera el tope (~200k).
-4. No re-solicitar con los mismos parámetros mientras exista una vigente.
-5. Descargar paquetes antes de 72 h; máx. 2 descargas por paquete.
-6. Guardar `IdSolicitud` / `IdsPaquetes` en estado local (archivo o DB simple).
-7. En export CONTPAQi: validar que el RFC de empresa aparezca como emisor (emitidos) o receptor (recibidos).
-8. En el ZIP de importación CONTPAQi: no anidar subcarpetas; XML en raíz.
-9. No sobrescribir XML ya exportados sin flag explícito.
+### Reportes
+Excel/CSV por RFC/periodo (desde metadata y/o XML parseado).
 
-## Almacenamiento previsto
+### Auditoría
+- **Faltantes:** en metadata pero sin XML (o viceversa).
+- **Cancelados:** vigentes en inventario local, cancelados en metadata nueva.
+- **69-B:** RFC emisor/receptor contra archivo oficial en `listas/`.
+
+### Scheduler
+Job diario: sync recibidos (+ emitidos opcional) del día/mes anterior por cada empresa.
+
+## Reglas de negocio
+
+1. Recibidos XML: `EstadoComprobante=Vigente`.
+2. Atributos firmados en orden alfabético.
+3. Partir rangos si hay riesgo de `5003` (~200k).
+4. No duplicar solicitudes vigentes (`5005` / `5002`).
+5. Paquetes: máx. 2 descargas, ~72 h de vida.
+6. Deduplicar UUID al guardar.
+7. CONTPAQi: RFC empresa debe coincidir; ZIP sin subcarpetas.
+8. Multi-empresa: nunca mezclar FIEL/RFC en la misma solicitud.
+9. Listas 69-B: versionar fecha de archivo descargado del SAT.
+10. Cancelados: no se pretende bajar XML cancelados recibidos por WS; se detectan con metadata.
+
+## Almacenamiento
 
 ```text
-downloads/
-  {rfc}/
-    {aaaa-mm}/
-      paquetes/
-        {id_paquete}.zip
-      xml/
-        {uuid}.xml
-export/
-  contpaqi_add/
-    {rfc}/
-      recibidos/{aaaa-mm}/{uuid}.xml
-      emitidos/{aaaa-mm}/{uuid}.xml
-      *.zip
-      manifiesto.csv
-state/
-  solicitudes.json
+fiel/{rfc}/certificado.cer
+fiel/{rfc}/llave.key
+downloads/{rfc}/{aaaa-mm}/paquetes/
+downloads/{rfc}/{aaaa-mm}/xml/{uuid}.xml
+downloads/{rfc}/{aaaa-mm}/metadata/
+export/contpaqi_add/{rfc}/...
+export/reportes/{rfc}/{aaaa-mm}.xlsx
+state/solicitudes.json
+state/inventario/{rfc}.json
+listas/69b_YYYYMMDD.csv
 ```
 
-## Fuera de alcance (v0)
+## Orden de implementación (cuando se autorice programar)
 
-- Portal SAT / CIEC
-- Retenciones (puede añadirse después con otros hosts)
-- UI web
-- Parsing contable / reportes Excel
-- Escritura directa a SQL Server / Lucene del ADD
-- Generación automática de pólizas en CONTPAQi
+1. `fiel` → `soap` → `auth`
+2. `solicitud` / `verificacion` / `descarga` (CFDI)
+3. `estado` + `particion` + `inventario`
+4. `exportadores.contpaqi_add`
+5. `metadata` + `reportes.excel_csv`
+6. `empresas` (multi-FIEL)
+7. `retenciones`
+8. `auditoria.*`
+9. `pdf` + `scheduler`
+10. `cli` unificado
 
-## Roadmap de producto (desde investigación de mercado)
+## Fuera de alcance
 
-Ver detalle en `docs/INVESTIGACION_MERCADO.md`.
-
-**MVP (v0)**  
-WS CFDI + estado de solicitudes + export CONTPAQi ADD.
-
-**v1**  
-Metadata→Excel/CSV, filtros (tipo/complemento/RFC), partición de rangos,
-deduplicación UUID, multi-empresa, retenciones.
-
-**v2**  
-Faltantes metadata vs XML, alerta cancelados, lista 69-B, PDF opcional, sync programado.
-
-## Criterios para pasar de borrador a código
-
-- [ ] Confirmar FIEL de prueba o productiva disponible
-- [ ] Definir defaults: solo `recibidos` + `CFDI` primero
-- [ ] Definir política de reintentos y polling
-- [ ] Validar con una carga real en CONTPAQi Contabilidad (Analizar directorio)
-- [ ] Congelar alcance MVP vs v1 (ver investigación de mercado)
-- [ ] Implementar módulos en el orden: fiel → auth → solicitud → verificación → descarga → exportador contpaqi → cli
+- Scraping portal / CIEC
+- Escritura SQL directa al ADD
+- Generación automática de pólizas CONTPAQi
+- SaaS multi-tenant (salvo petición futura)
