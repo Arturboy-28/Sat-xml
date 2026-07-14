@@ -1,11 +1,21 @@
 # Sat-xml (borrador completo)
 
-Borrador de un sistema de **descarga masiva de XML CFDI** vía **Web Service SAT v1.5**
-(e.firma), con **exportador CONTPAQi Almacén Digital** y el resto de capacidades
-habituales del mercado (metadata, Excel, multi-empresa, retenciones, auditoría, sync).
+App local de **descarga masiva CFDI** (Web Service SAT v1.5 + FIEL) con
+**UI web atractiva**, exportador a **Almacén Digital CONTPAQi** y herramientas
+de auditoría.
 
 > Canal: **solo Web Service** (no portal / no CIEC).  
 > Estado: **borrador**. Sin lógica programada.
+
+## Formato de programación
+
+| Capa | Stack |
+|------|--------|
+| Backend | Python + FastAPI + paquete `sat_xml/` |
+| Frontend | Vite + React (UI principal) |
+| Extra | CLI `sat-xml` para automatización |
+
+Detalle visual y pantallas: [`docs/STACK_Y_UI.md`](docs/STACK_Y_UI.md)
 
 ## Alcance (todo el roadmap)
 
@@ -19,7 +29,7 @@ habituales del mercado (metadata, Excel, multi-empresa, retenciones, auditoría,
 | Reportes | Metadata → Excel/CSV; manifiesto de export |
 | Auditoría | Faltantes metadata vs XML; alertas cancelados; lista 69/69-B |
 | Extras | PDF representación (opcional); sync/scheduler diario |
-| CLI | Comandos de sync, export, reportes y auditoría |
+| Interfaces | **UI web** (principal) + CLI |
 
 ## Flujo general
 
@@ -50,37 +60,22 @@ FIEL(s) multi-empresa
 
 ```text
 sat_xml/
-  fiel.py                 # e.firma
-  soap.py / auth.py
-  solicitud.py            # CFDI emitidos/recibidos/folio
-  retenciones.py          # WS retenciones
-  verificacion.py
-  descarga.py
-  particion.py            # partir rangos (tope 200k / 5003)
-  estado.py               # cola IdSolicitud + reanudación
-  inventario.py           # dedupe UUID / índice local
-  metadata.py             # parse metadata TXT → estructuras
-  reportes/
-    excel_csv.py          # export Excel/CSV
-  exportadores/
-    contpaqi_add.py       # Almacén Digital CONTPAQi
-  auditoria/
-    faltantes.py          # metadata vs XML
-    cancelados.py         # re-chequeo estatus
-    lista_69b.py          # EFOS / 69-B
-  pdf.py                  # representación impresa (opcional)
-  scheduler.py            # sync diario
-  empresas.py             # multi-FIEL / multi-RFC
-  client.py / cli.py
+  api.py                  # FastAPI (UI)
+  fiel.py
+  ...
+web/                      # React + Vite (UI atractiva)
+  styles/tokens.css.draft
 docs/
+  STACK_Y_UI.md           # stack + dirección visual
   BORRADOR.md
   INVESTIGACION_MERCADO.md
-fiel/{rfc}/               # una carpeta por empresa
+fiel/{rfc}/
 downloads/
 export/contpaqi_add/
 export/reportes/
+export/pdf/
 state/
-listas/                   # archivos 69-B oficiales
+listas/
 ```
 
 ## Endpoints SAT (referencia)
@@ -135,5 +130,6 @@ mkdir -p fiel/MI_RFC downloads export/contpaqi_add export/reportes state listas
 
 ## Docs
 
-- `docs/BORRADOR.md` — diseño completo de módulos y reglas
+- `docs/STACK_Y_UI.md` — formato de programación + UI visual
+- `docs/BORRADOR.md` — diseño de módulos y reglas
 - `docs/INVESTIGACION_MERCADO.md` — origen de las features

@@ -5,16 +5,21 @@ Alcance: **todo el roadmap** (núcleo WS + CONTPAQi + reportes + auditoría + sy
 
 ## Arquitectura
 
-- Canal: Web Service SAT 1.5 (CFDI y Retenciones).
+- **UI principal:** web app (Vite + React) contra API local FastAPI.
+- **Motor:** Python `sat_xml/` — Web Service SAT 1.5 (CFDI y Retenciones).
 - Auth: e.firma (FIEL), multi-empresa.
 - Sin portal / sin CIEC.
-- Persistencia local: archivos + `state/` (JSON).
+- Persistencia local: archivos + JSON en `state/`.
 - Destinos: disco organizado, CONTPAQi ADD, Excel/CSV, PDF opcional.
+- CLI secundaria para scripts/scheduler.
+
+Ver también `docs/STACK_Y_UI.md`.
 
 ## Mapa de módulos
 
 | Módulo | Responsabilidad |
 |--------|-----------------|
+| `api` | FastAPI local para la UI |
 | `empresas` | Registro multi-RFC / rutas FIEL |
 | `fiel` | Cargar .cer/.key, firmar |
 | `soap` | HTTP SOAP + firmas |
@@ -106,12 +111,14 @@ listas/69b_YYYYMMDD.csv
 2. `solicitud` / `verificacion` / `descarga` (CFDI)
 3. `estado` + `particion` + `inventario`
 4. `exportadores.contpaqi_add`
-5. `metadata` + `reportes.excel_csv`
-6. `empresas` (multi-FIEL)
-7. `retenciones`
-8. `auditoria.*`
-9. `pdf` + `scheduler`
-10. `cli` unificado
+5. Scaffold **web/** (Vite+React) + tokens visuales + pantallas base
+6. `api` FastAPI conectada a sync/export
+7. `metadata` + `reportes.excel_csv`
+8. `empresas` (multi-FIEL) en UI
+9. `retenciones`
+10. `auditoria.*`
+11. `pdf` + `scheduler`
+12. `cli` unificado
 
 ## Fuera de alcance
 
@@ -119,3 +126,4 @@ listas/69b_YYYYMMDD.csv
 - Escritura SQL directa al ADD
 - Generación automática de pólizas CONTPAQi
 - SaaS multi-tenant (salvo petición futura)
+- UI hecha con Streamlit / formularios Windows clásicos

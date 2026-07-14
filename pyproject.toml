@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "sat-xml"
 version = "0.1.0"
-description = "Borrador completo: WS SAT 1.5, CONTPAQi ADD, metadata, auditoría y sync"
+description = "Borrador: app web Sat-xml (FastAPI + React) + WS SAT + CONTPAQi"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
@@ -19,8 +19,9 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=8.0.0"]
 # Futuro (cuando se implemente):
+# api = ["fastapi>=0.110.0", "uvicorn[standard]>=0.27.0"]
 # reportes = ["openpyxl>=3.1.0"]
-# pdf = ["casaone-cfdi-pdf"]  # o librería PDF elegida
+# pdf = []
 # scheduler = []
 
 # CLI (activar cuando se implemente sat_xml.cli:main):

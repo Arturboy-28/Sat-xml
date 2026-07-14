@@ -1,0 +1,20 @@
+/*
+ * Tokens de marca Sat-xml (borrador visual).
+ * Paleta: tinta forestal + acento dorado oliva.
+ * Tipografías previstas: Fraunces (display) + Source Sans 3 (UI).
+ */
+
+:root {
+  --ink: #0e1a17;
+  --panel: #162420;
+  --line: #2a3d36;
+  --mist: #d7e3dc;
+  --paper: #f3f6f2;
+  --accent: #c4a35a;
+  --ok: #3d9a6a;
+  --warn: #d4a017;
+  --danger: #c45c4a;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-ui: "Source Sans 3", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
